@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#1E3A5F"              # 主色：深蓝（品牌色）
+backgroundColor = "#FFFFFF"            # 主背景：纯白
+secondaryBackgroundColor = "#F7F7F8"   # 侧边栏 / 卡片背景：浅灰
+textColor = "#1A1A1A"                  # 主文字：深灰
+font = "sans serif"
