@@ -174,6 +174,7 @@ streamlit run src/app.py
 ---
 
 ## 七、演示截图
+
 ### 1. 欢迎页
 ![欢迎页](docs/screenshots/welcome.png)
 
@@ -189,8 +190,6 @@ streamlit run src/app.py
 ![资源视图](docs/screenshots/02_sources.png)
 ![资源视图](docs/screenshots/03_sources.png)
 
-
----
 
 ## 项目亮点
 
