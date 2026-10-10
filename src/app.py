@@ -8,6 +8,7 @@ import streamlit as st
 from langchain_core.messages import HumanMessage
 from src.graph import build_main_graph
 from src.i18n import t
+import time
 
 st.set_page_config(
     page_title="Financial BI Assistant",
@@ -527,7 +528,7 @@ if view == "chats":
                 st.rerun()
         with cols[2]:
             if st.button(t("quick_policy", lang), key="q3", use_container_width=True):
-                st.session_state.pending_query = "差旅住宿费报销的标准是什么？"
+                st.session_state.pending_query = "一线城市（北上广深）住宿标准是多少？"
                 st.rerun()
 
     # 显示当前会话的消息

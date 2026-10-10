@@ -1,7 +1,6 @@
 """
 state.py
 定义 LangGraph 的全局状态（State）。
-所有节点通过读写这个 State 来传递数据。
 """
 
 from typing import TypedDict, Annotated, Literal
@@ -14,8 +13,8 @@ class AgentState(TypedDict):
     messages: Annotated[list[BaseMessage], add_messages]
 
     # ===== 路由意图 =====
-    # 取值：'查数据' | '问制度' | '做归因'
-    intent: Literal["查数据", "问制度", "做归因"]
+    intent: Literal["查数据", "问制度", "做归因" , "闲聊"]
+    has_multi_intent: bool
 
     # ===== SQL 相关 =====
     generated_sql: str          # LLM 生成的 SQL

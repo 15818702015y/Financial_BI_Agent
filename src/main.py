@@ -10,7 +10,7 @@ def main():
     graph = build_main_graph()
 
     # 模拟用户提问
-    user_query = "华南区 8 月发生了什么？"
+    user_query = "出差地打车、网约车有限额吗？"
     print("=" * 60)
     print(f"用户提问：{user_query}")
     print("=" * 60)

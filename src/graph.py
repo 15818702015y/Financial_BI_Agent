@@ -9,18 +9,16 @@ from src.nodes.router import router_node
 from src.nodes.rag_agent import rag_retrieval_node
 from src.nodes.rag_only_agent import rag_only_node
 from src.nodes.sql_agent import sql_generation_node, sql_execution_node, should_retry_sql, sql_answer_node
-from src.nodes.attribution import (
-    data_analysis_node, attribution_generation_node, chart_node
-)
+from src.nodes.attribution import (data_analysis_node, attribution_generation_node, chart_node)
+from src.nodes.chat_node import chat_node
 
 def build_sql_subgraph():
-    """构建'查数据'子图：生成 SQL -> 执行 SQL -> (可选)自纠错"""
+    """构建'查数据'子图：生成 SQL -> 执行 SQL -> 自纠错"""
     subgraph = StateGraph(AgentState)
     subgraph.add_node("sql_generation", sql_generation_node)
     subgraph.add_node("sql_execution", sql_execution_node)
     subgraph.add_edge(START, "sql_generation")
     subgraph.add_edge("sql_generation", "sql_execution")
-    # 新增回答生成节点
     subgraph.add_node("sql_answer", sql_answer_node)
     subgraph.add_conditional_edges(
         "sql_execution",
@@ -72,14 +70,17 @@ def build_main_graph():
     main.add_node("sql_subgraph", sql_subgraph)
     main.add_node("attribution_subgraph", attribution_subgraph)
     main.add_node("rag_only", rag_only_node)
+    main.add_node("chat", chat_node)
     main.add_edge(START, "router")
     main.add_conditional_edges("router", lambda s: s["intent"], {
         "查数据": "sql_subgraph",
         "问制度": "rag_only",
         "做归因": "attribution_subgraph",
+        "闲聊": "chat",
     })
     main.add_edge("sql_subgraph", END)
     main.add_edge("rag_only", END)
     main.add_edge("attribution_subgraph", END)
+    main.add_edge("chat", END)
 
     return main.compile()

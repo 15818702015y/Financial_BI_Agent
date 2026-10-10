@@ -17,9 +17,8 @@ llm_deepseek = ChatDeepSeek(
     model="deepseek-flash",
     api_key=DEEPSEEK_API_KEY,
     api_base=DEEPSEEK_BASE_URL,
-    temperature=0,           # 财务场景建议用 0，减少随机性
+    temperature=0,
 )
 
 def get_llm():
-    """供其他节点统一调用的入口"""
     return llm_deepseek
